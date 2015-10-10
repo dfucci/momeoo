@@ -1,2 +1,2 @@
-@People = new Mongo.Collection 'people'
+@Teams = new Mongo.Collection 'teams'
 

@@ -1,5 +1,12 @@
-Meteor.publish 'allPeople', ()->
-  People.find()
+#Meteor.publish 'allTeams', ()->
+  #Teams.find()
 
 Meteor.onConnection (data)->
-  People.insert data
+  team = Random.choice ["odd", "even"]
+  Teams.insert {id:data.id, team: team}
+
+Meteor.methods
+  lastTeam: () ->
+    team = Teams.find({}, {limit:1}, {sort:{$natural: -1}}).fetch()[0]
+    console.log team.team
+    team.team

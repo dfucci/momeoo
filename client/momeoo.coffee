@@ -1,8 +1,7 @@
-Meteor.subscribe 'allPeople'
+#Meteor.subscribe 'allPeople'
 
 Template.hello.helpers
-  counter: ()->
-    People.find().count()
-
+  team: ()->
+    ReactiveMethod.call 'lastTeam' #see meteor-reactive-method package
 
 
