@@ -7,6 +7,6 @@ Meteor.onConnection (data)->
 
 Meteor.methods
   lastTeam: () ->
-    team = Teams.find({}, {limit:1}, {sort:{$natural: -1}}).fetch()[0]
+    team = Teams.find({}, {sort:{$natural: -1}}, limit:1).fetch()[0]
     console.log team.team
     team.team
