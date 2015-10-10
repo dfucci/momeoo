@@ -15,12 +15,7 @@
       {{> hello}}
       <p class="lead">Cast your vote</p>
       <p>
-        <a class="btn btn-lg btn-success" href="#" role="button">0</a>
-        <a class="btn btn-lg btn-success" href="#" role="button">1</a>
-        <a class="btn btn-lg btn-success" href="#" role="button">2</a>
-        <a class="btn btn-lg btn-success" href="#" role="button">3</a>
-        <a class="btn btn-lg btn-success" href="#" role="button">4</a>
-        <a class="btn btn-lg btn-success" href="#" role="button">5</a>
+        {{> buttons}}
       </p>
     </div>
 
@@ -39,5 +34,14 @@
   </div> <!-- /container -->
 </body>
 <template name="hello">
-  <h2>You are playing for the {{team}} team!</h2>
+  <h2>You are playing for the <span id={{team}}> {{team}}</span> team!</h2>
+</template>
+
+<template name="buttons">
+  <a class="btn btn-lg btn-success {{voted}}" href="#" role="button">0</a>
+  <a class="btn btn-lg btn-success {{voted}}" href="#" role="button">1</a>
+  <a class="btn btn-lg btn-success {{voted}}" href="#" role="button">2</a>
+  <a class="btn btn-lg btn-success {{voted}}" href="#" role="button">3</a>
+  <a class="btn btn-lg btn-success {{voted}}" href="#" role="button">4</a>
+  <a class="btn btn-lg btn-success {{voted}}" href="#" role="button">5</a>
 </template>

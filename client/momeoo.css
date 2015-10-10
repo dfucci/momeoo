@@ -4,7 +4,19 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-
+#odd {
+  color: red;
+}
+#even {
+  color: blue;
+}
+.clicked {
+  border-style: solid;
+  border-width: 10px;
+  border-color: black;
+  color:black;
+  font-weight:bold;
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -72,10 +84,10 @@ body {
  /* Space out the masthead */
  .header {
    margin-bottom: 30px;
-             }
-             /* Remove the bottom border on the jumbotron for visual effect */
-             .jumbotron {
-               border-bottom: 0;
-                                      }
+           }
+           /* Remove the bottom border on the jumbotron for visual effect */
+           .jumbotron {
+             border-bottom: 0;
                                     }
+                                  }
 
