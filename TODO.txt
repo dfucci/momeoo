@@ -2,4 +2,8 @@
 [x] when the client connects the page shows his/her team
 [x] the client can vote 1 to 5
 [x] the client can vote only once per game 
-[ ] count the number of each vote
+[x] count the number of each vote
+[ ] refactor result method
+[ ] show countdown
+[ ] various cleanup
+[ ] improve UX (eg, overlay when voted, colors)
