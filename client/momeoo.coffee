@@ -31,4 +31,4 @@ Template.game.events
 Template.results.helpers
     result: ()->
       console.log Results.find().fetch()[0]
-
+      Results.find().fetch()[0]
