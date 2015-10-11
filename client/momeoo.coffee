@@ -30,5 +30,10 @@ Template.game.events
 
 Template.results.helpers
     result: ()->
-      console.log Results.find().fetch()[0]
       Results.find().fetch()[0]
+
+    isWinner: () ->
+      winner = Results.find().fetch()[0]["winner"]
+      console.log winner
+      message = if Session.get('team') == winner then "congratulations!" else "too bad :("
+      message
