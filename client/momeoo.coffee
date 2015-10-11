@@ -1,5 +1,8 @@
 Session.set 'voted', 'enabled'
 Meteor.subscribe 'results'
+#countdown = new ReactiveCountdown(10)
+#countdown.start()
+
 Template.hello.helpers
   team: ()->
     team = ReactiveMethod.call 'lastTeam' #see meteor-reactive-method package
@@ -22,18 +25,26 @@ Template.buttons.events
 
     Meteor.call 'addVote', vote
 
-Template.game.events
-  'click .btn-warning': (e, tpl)->
-    e.preventDefault()
-    Meteor.call 'calculateResult'
-    console.log 'callled'
+#Template.game.events
+  #'click .btn-warning': (e, tpl)->
+    #e.preventDefault()
+    #Meteor.call 'calculateResult'
+
+#Template.game.helpers
+    #getCountdown: ()->
+      #console.log countdown
+      #countdown.get()
 
 Template.results.helpers
     result: ()->
-      Results.find().fetch()[0]
+      res = Results.find({}, {sort:{createdAt: -1}}, limit: 1).fetch()[0]
+      console.log res
+      res
 
     isWinner: () ->
-      winner = Results.find().fetch()[0]["winner"]
-      console.log winner
-      message = if Session.get('team') == winner then "congratulations!" else "too bad :("
+      result = Results.find({}, {sort:{createdAt: -1}}, limit: 1).fetch()[0]
+      if result? and result.odd.result? and result.even.result?
+        message = "The winner is #{result.winner.toUpperCase()}"
+        message += if Session.get('team') == result.winner then " congratulations!" else " too bad :("
+      else message = "Waiting for votes..."
       message

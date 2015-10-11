@@ -21,7 +21,7 @@
 
     <div class="row marketing">
       <div class="col-lg-2">
-        {{> game}}
+        <!--{{> game}}-->
       </div>
     </div>
     <div class="row marketing">
@@ -49,13 +49,13 @@
   <a class="btn btn-lg btn-success {{voted}}" href="#" role="button">5</a>
 </template>
 
-<template name="game">
-  <a class="btn btn-lg btn-warning" href="#">Play</a>
-</template>
+<!--<template name="game">-->
+  <!--<big>{{getContdown}} seconds left!</big>-->
+<!--</template>-->
 
 <template name="results">
-  <p class="text-center">The most voted for the ODD team was {{result.odd.result}} with {{result.odd.votes}} votes</p>
-  <p class="text-center">The most voted for the EVEN team was {{result.even.result}} with {{result.even.votes}} votes</p>
-  <p class="text-center">The winner is <span id={{result.winner}}>{{result.winner}}</span>, {{isWinner}}</p>
+  <p class="text-center">{{#if result.odd.result}} The most voted for the ODD team was {{result.odd.result}} with {{result.odd.votes}} votes{{/if}}</p>
+  <p class="text-center">{{#if result.even.result}} The most voted for the EVEN team was {{result.even.result}} with {{result.even.votes}} votes{{/if}}</p>
+  <p class="text-center">{{isWinner}}</p>
 </template>
 

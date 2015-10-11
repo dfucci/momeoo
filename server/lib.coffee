@@ -1,5 +1,33 @@
+Meteor.startup ()->
+  Meteor.setInterval ()->
+    even = Votes.find({team: 'even'}).fetch()
+    odd = Votes.find({team: 'odd'}).fetch()
+    cEven = _.countBy even, 'vote'
+    cOdd = _.countBy odd, 'vote'
+    maxOdd = _.max cOdd
+    maxEven = _.max cEven
+    resultOdd = _.invert(cOdd)[maxOdd]
+    resultEven = _.invert(cEven)[maxEven]
+    result =parseInt(resultEven) + parseInt(resultOdd)
+    winner = if result % 2 then "odd" else "even"
+    resultWinner =
+      winner: winner
+      createdAt: new Date()
+      odd:
+        result: resultOdd
+        votes: maxOdd
+      even:
+        result: resultEven
+        votes: maxEven
+
+    Results.insert resultWinner
+    Votes.remove {}
+    console.log 'the winner of this round is'
+    console.log resultWinner
+  , 30000
+
 Meteor.publish 'results', ()->
-  Results.find({}, {sort:{$natural: -1}}, limit: 1)
+  Results.find({})
 
 Meteor.onConnection (data)->
   team = Random.choice ["odd", "even"]
@@ -13,24 +41,25 @@ Meteor.methods
   addVote: (vote)->
     Votes.insert vote
 
-  calculateResult: ()->
-    even = Votes.find({team: 'even'}).fetch()
-    odd = Votes.find({team: 'odd'}).fetch()
-    cEven = _.countBy even, 'vote'
-    cOdd = _.countBy odd, 'vote'
-    maxOdd = _.max cOdd
-    maxEven = _.max cEven
-    resultOdd = _.invert(cOdd)[maxOdd]
-    resultEven = _.invert(cEven)[maxEven]
-    result =parseInt(resultEven) + parseInt(resultOdd)
-    winner = if result % 2 then "odd" else "even"
-    resultWinner =
-      winner: winner
-      odd:
-        result: resultOdd
-        votes: maxOdd
-      even:
-        result: resultEven
-        votes: maxEven
+  #calculateResult: ()->
+    #even = Votes.find({team: 'even'}).fetch()
+    #odd = Votes.find({team: 'odd'}).fetch()
+    #cEven = _.countBy even, 'vote'
+    #cOdd = _.countBy odd, 'vote'
+    #maxOdd = _.max cOdd
+    #maxEven = _.max cEven
+    #resultOdd = _.invert(cOdd)[maxOdd]
+    #resultEven = _.invert(cEven)[maxEven]
+    #result =parseInt(resultEven) + parseInt(resultOdd)
+    #winner = if result % 2 then "odd" else "even"
+    #resultWinner =
+      #winner: winner
+      #odd:
+        #result: resultOdd
+        #votes: maxOdd
+      #even:
+        #result: resultEven
+        #votes: maxEven
 
-    Results.insert resultWinner
+    #Results.insert resultWinner
+    #Votes.remove {}
